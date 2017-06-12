@@ -19,4 +19,10 @@ class Choice(models.Model):
 	votes = models.IntegerField(default = 0)
 	def __str__(self):
 		return self.choice_text
+
+class Name(models.Model):
+	Your_name = models.CharField(max_length=100)
+	Age = models.CharField(max_length=100)
+	Email = models.EmailField()
+
 # Create your models here.

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
-from .models import Choice, Question
+from .models import Choice, Question, Name
 from .forms import NameForm
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
