@@ -24,5 +24,6 @@ class Name(models.Model):
 	Your_name = models.CharField(max_length=100)
 	Age = models.CharField(max_length=100)
 	Email = models.EmailField()
+	
 
 # Create your models here.

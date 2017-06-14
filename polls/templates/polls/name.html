@@ -1,6 +1,17 @@
 <h1>Information</h1>
-<form action="/admin/" method="post">
+<form action="" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit" />
+    <p> Thanks, Your entry is saved </p>
+    
+
+    <input type="button" value="List"  />
+
+   
 </form>
+ <script>
+
+  alert("Entry submitted");
+
+</script>

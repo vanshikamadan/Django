@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.views import generic
 from .models import Choice, Question, Name
 from .forms import NameForm
+from django.shortcuts import render_to_response
+
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
@@ -52,10 +54,11 @@ def get_name(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+            
+            return render(request, 'polls/name.html', {'form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = NameForm()
 
-    return render(request, 'polls/name.html', {'form': form})
+        return render(request, 'polls/name.html', {'form': form})
