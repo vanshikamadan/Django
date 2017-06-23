@@ -5,6 +5,13 @@ from django.views import generic
 from .models import Choice, Question, Name
 from .forms import NameForm
 from django.shortcuts import render_to_response
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -54,11 +61,39 @@ def get_name(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            
-            return render(request, 'polls/name.html', {'form': form})
+            name = Name(Your_name = request.POST["your_name"], Age = request.POST["your_age"], Email = request.POST["your_email"])
+            name.save() 
+            return HttpResponse("Entry Saved")
+
+            #return render(request, 'polls/name.html', {'form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = NameForm()
+         form = NameForm()
 
-        return render(request, 'polls/name.html', {'form': form})
+    return render(request, 'polls/name.html', {'form': form})
+
+    #info = {"Your_name": "vanshika"}
+
+def more_todo(request):
+    if request.is_ajax():
+        todo_items = ['Mow Lawn', 'Buy Groceries',]
+        data = json.dumps(todo_items)
+        return HttpResponse(data, content_type='application/json')
+    else:
+        raise Http404 
+
+def info(request):
+    if request.is_ajax():
+        name = Name.objects.values();
+        name_list = list(name)
+        x = json.dumps(name_list)
+        return HttpResponse(x, content_type='application/json')
+    else: 
+        raise Http404
+
+            
+            
+    #return render(request, 'polls/name.html', info)
+    
+

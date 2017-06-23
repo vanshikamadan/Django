@@ -1,17 +1,54 @@
-<h1>Information</h1>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+<h1>Information</h1> </head>
+<body>
 <form action="" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit" />
-    <p> Thanks, Your entry is saved </p>
-    
-
-    <input type="button" value="List"  />
-
-   
 </form>
- <script>
 
-  alert("Entry submitted");
+<input type="button" value="List" />
+<br>
+<table id="myTable">
+  <thead>
+    <tr>
+     <th> Name</th>
+     <th> Age </th>
+     <th> Email </th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    
+  </tbody>
+</table>
+
+ <script>
+  $(":submit").click(function(){
+  	  alert("Entry submitted");
+
+
+    });
+  $(":button").click(function(){
+    // for( i=0; i<info.length(); i++){
+      $.ajax({
+         url:  "http://127.0.0.1:8000/polls/display/",
+         type: "GET",
+         success: function(x) {
+          for(i = 0; i < x.length; i++){
+              $("#myTable").append("<tr><td>"+ x[i].Your_name + "</td><td>" + x[i].Age + "</td><td>" + x[i].Email + "</td></tr>");
+
+
+            }
+
+         }
+      });
+
+    
+  });
 
 </script>
+</body>
+</html>

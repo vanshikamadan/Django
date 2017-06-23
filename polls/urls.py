@@ -1,5 +1,5 @@
 from django.conf.urls import url
-
+from polls import views
 from . import views
 app_name = 'polls'
 urlpatterns = [
@@ -12,6 +12,9 @@ urlpatterns = [
     
     url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
 
-    url(r'^your_name/$', views.get_name, name='name'),    
+    url(r'^your_name/$', views.get_name, name='name'), 
 
+    url(r'^ajax/more/$', views.more_todo, name='name'),
+ 
+    url(r'^display/$', views.info, name='name'),  
 ]
